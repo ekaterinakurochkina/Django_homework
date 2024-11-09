@@ -1,0 +1,143 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Бытовая техника",
+        "description": "Надежная техника для дома и кухни."
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Косметика и парфюмерия",
+        "description": "Красота и ухоженность."
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Спортивные товары",
+        "description": "Всё для активного образа жизни."
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Парфюмированная вода Dior Jadore",
+        "description": "Роскошный цветочный аромат с нотами жасмина, розы и персика",
+        "image": "",
+        "category": 2,
+        "price": 5990,
+        "created_at": "2024-11-08T17:06:24.739Z",
+        "updated_at": "2024-11-08T17:06:24.739Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Робот-пылесос ILIFE A7",
+        "description": "Высокопроизводительный робот-пылесос с интеллектуальной системой навигации и возможностью влажной уборки",
+        "image": "media/images/Робот-пылесос.jpeg",
+        "category": 1,
+        "price": 24990,
+        "created_at": "2024-11-08T17:07:29.477Z",
+        "updated_at": "2024-11-08T17:07:29.477Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Набор для макияжа NYX Professional Makeup",
+        "description": "Палетка теней для век с широкой цветовой гаммой и высокой пигментацией",
+        "image": "",
+        "category": 2,
+        "price": 1990,
+        "created_at": "2024-11-08T17:08:16.462Z",
+        "updated_at": "2024-11-08T17:08:16.462Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "Стиральная машина LG FH4G1JCS2",
+        "description": "Энергоэффективная стиральная машина с технологией TrueSteam и функцией SmartThinQ",
+        "image": "media/images/Стиральная машина.jpeg",
+        "category": 4,
+        "price": 39990,
+        "created_at": "2024-11-08T17:20:23.948Z",
+        "updated_at": "2024-11-08T17:20:23.948Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "Крем для лица Clinique Moisturizing Lotion+",
+        "description": "Увлажняющий крем для всех типов кожи, обогащенный питательными веществами",
+        "image": "media/images/Крем для лица.jpeg",
+        "category": 6,
+        "price": 2590,
+        "created_at": "2024-11-08T17:21:09.782Z",
+        "updated_at": "2024-11-08T17:21:09.782Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+        "name": "Беговая дорожка Horizon Fitness T101",
+        "description": "Надежная домашняя беговая дорожка с богатым функционалом и плавным ходом",
+        "image": "media/images/Беговая дорожка.png ",
+        "category": 5,
+        "price": 49990,
+        "created_at": "2024-11-08T17:21:22.518Z",
+        "updated_at": "2024-11-08T17:21:22.518Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+        "name": "Велотренажер Bowflex VeloCore",
+        "description": "Инновационный велотренажер с возможностью наклона и поворота рамы для более интенсивной тренировки",
+        "image": "media/images/Велотренажер.jpeg",
+        "category": 5,
+        "price": 89990,
+        "created_at": "2024-11-08T17:22:56.752Z",
+        "updated_at": "2024-11-08T17:22:56.752Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+        "name": "Гантели Bowflex SelectTech 552",
+        "description": "Регулируемые гантели с диапазоном от 2,3 до 24 кг, заменяющие 15 пар обычных гантелей",
+        "image": "media/images/Гантели.jpeg",
+        "category": 5,
+        "price": 14990,
+        "created_at": "2024-11-08T17:23:09.809Z",
+        "updated_at": "2024-11-08T17:23:09.809Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+        "name": "Телевизор Samsung QE55Q60A",
+        "description": "Высококачественный QLED-телевизор с технологией 4K HDR и функцией Smart TV",
+        "image": "media/images/Телевизор.jpeg",
+        "category": 4,
+        "price": 64990,
+        "created_at": "2024-11-08T17:23:16.256Z",
+        "updated_at": "2024-11-08T17:23:16.256Z"
+    }
+}
+]
