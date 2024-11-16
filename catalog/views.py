@@ -11,6 +11,8 @@ def home(request):
 def contacts(request):
     return render(request, 'catalog/contacts.html')
 
+def base(request):
+    return render(request, 'catalog/base.html')
 
 def contact_data(request):
     if request.method == 'POST':
