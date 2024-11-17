@@ -18,6 +18,10 @@ def products_list(request):
     context = {"products": products}
     return render(request,'catalog/products_list.html', context)
 
+def product_detail(request, pk):
+    product = Product.objects.get(pk=pk)
+    context = {'product': product}
+    return render(request, 'catalog/products_detail.html', context)
 
 def contact_data(request):
     if request.method == 'POST':
