@@ -1,14 +1,14 @@
-{% extends 'Blogs/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Форма редактирования поста{% endblock %}
 
 {% block content %}
-{% include 'Blogs/header.html' %}
+{% include 'header.html' %}
 <h2>Изменить пост</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Сохранить</button>
-    <a href="{% url 'books_list' %}" class="btn btn-secondary">Отмена</a>
+    <a href="{% url 'blogs:blogs_list' %}" class="btn btn-secondary">Отмена</a>
 </form>
 {% endblock %}

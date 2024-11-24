@@ -1,14 +1,14 @@
-{% extends 'library/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Список постов{% endblock %}
 
 {% block content %}
-{% include 'Blogs/header.html' %}
+{% include 'header.html' %}
 <h2>Список постов блога</h2>
 <ul class="list-group">
     {% for blog in blogs %}
         <li class="list-group-item">
-            <a href="{% url 'blogs_detail' blog.pk %}">{{ blog.title }} - {{ blog.created_at }} - {{ blog.views_counter}}</a>
+            <a href="{% url 'blogs:blogs_detail' blog.pk %}">{{ blog.title }} - {{ blog.created_at }} - {{ blog.views_counter}}</a>
         </li>
     {% endfor %}
 </ul>
