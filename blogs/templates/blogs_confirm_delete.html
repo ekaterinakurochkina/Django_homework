@@ -5,7 +5,7 @@
 {% block content %}
 {% include 'Blogs/header.html' %}
 <h2>Удалить книгу</h2>
-<p>Вы уверены, что хотите удалить пост "{{ book.title }}"?</p>
+<p>Вы уверены, что хотите удалить пост "{{ blog.title }}"?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Удалить</button>
