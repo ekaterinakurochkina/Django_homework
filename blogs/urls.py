@@ -10,8 +10,8 @@ app_name = 'blogs'
 
 urlpatterns = [
     path('', BlogsListView.as_view(), name='blogs_list'),
-    path('blogs/<int:pk>/', BlogsDetailView.as_view(), name='blog_detail'),
-    path('blogs/new/', BlogsCreateView.as_view(), name='blog_create'),
-    path('blogs/<int:pk>/edit/', BlogsUpdateView.as_view(), name='blog_edit'),
-    path('blogs/<int:pk>/delete/', BlogsDeleteView.as_view(), name='blog_delete'),
+    path('blogs/<int:pk>/', BlogsDetailView.as_view(), name='blogs_detail'),
+    path('blogs/new/', BlogsCreateView.as_view(), name='blogs_create'),
+    path('blogs/<int:pk>/edit/', BlogsUpdateView.as_view(), name='blogs_edit'),
+    path('blogs/<int:pk>/delete/', BlogsDeleteView.as_view(), name='blogs_delete'),
 ]

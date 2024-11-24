@@ -8,19 +8,19 @@ from django.urls import reverse_lazy
 
 class BlogsListView(ListView):
     model = Blogs
-    # template_name = 'blogs/blogs_list.html'
-    # context_object_name = 'blogs'
+    template_name = 'blogs/blogs_list.html'
+    context_object_name = 'blogs'
 
 class BlogsDetailView(DetailView):
     model = Blogs
-    template_name = 'blogs/blog_detail.html'
+    template_name = 'blogs/blogs_detail.html'
     context_object_name = 'blog'
 
 
 class BlogsCreateView(CreateView):
     model = Blogs
     fields = ['title', 'content', 'image', 'is_published']
-    # template_name = 'blogs/blogs_form.html'
+    template_name = 'blogs/blogs_form.html'
     success_url = reverse_lazy('blogs_list')
 
 

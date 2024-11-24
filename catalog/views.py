@@ -11,6 +11,7 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
 
+
 def home(request):
     return render(request, 'catalog/home.html')
 
