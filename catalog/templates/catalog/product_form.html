@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+{% include 'header.html' %}
+
+<div class="container">
+  <form class="row" method="post" enctype="multipart/form-data">
+    <div class="col-6">
+      <div class="card">
+        {% if object %>
+          <p class="card-text">Редактировать продукт</p>
+        {% else %}
+          <p class="card-text">Создать продукт</p>
+        {% endif %}
+        <div class="card-body">
+          {% csrf_token %}
+          {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">
+          {% if object %}
+            Сохранить
+          {% else %}
+            Создать
+          {% endif %}
+        </button>
+      </div>
+    </div>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'blogs:blogs_list' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'blogs:blogs_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

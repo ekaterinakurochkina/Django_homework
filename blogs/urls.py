@@ -1,8 +1,5 @@
-from django.contrib import admin
 from django.urls import path
-from blogs.apps import BlogsConfig
 from .views import BlogsListView, BlogsCreateView, BlogsUpdateView, BlogsDeleteView, BlogsDetailView
-# from blogs.views import BlogsListView, BlogsDetailView
 from blogs.models import Blogs
 
 app_name = 'blogs'
