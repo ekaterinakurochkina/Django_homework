@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 from django.contrib import admin
 from catalog.apps import CatalogConfig
-# from catalog.views import products_list, product_detail, ProductListView
 from catalog.views import ProductCreateView, ProductDeleteView, ProductUpdateView,ProductListView, ProductDetailView
 from .models import Product
 from django.conf import settings
@@ -12,18 +11,11 @@ app_name = CatalogConfig.name
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('home/', views.home, name='home'),
-    # path('contacts/', views.contact_data, name='contact_data'),
-    # path('base/', views.base, name='base'),
-    # path('products_list/', views.products_list, name='products_list'),
-    # path('', ProductListView.as_view(), name='products_list'),
-    # path('product_detail/<int:pk>', views.product_detail, name='product_detail'),
     path('',ProductListView.as_view(), name='product_list'),
     path('catalog/<int:pk>',ProductDetailView.as_view(), name='product_detail'),
     path('catalog/new/',ProductCreateView.as_view(), name='product_create'),
     path('catalog/<int:pk>/edit/',ProductUpdateView.as_view(), name='product_edit'),
     path('catalog/<int:pk>/delete/',ProductDeleteView.as_view(), name='product_delete'),
-
 ]
 
 if settings.DEBUG:

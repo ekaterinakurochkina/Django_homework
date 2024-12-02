@@ -1,6 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
+<a class="btn btn-primary w-100" role="button" href="{% url 'catalog:product_create' %}">Добавить товар</a>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -27,7 +28,6 @@
     </div>
   </div>
 
-    <a class="btn btn-primary" role="button" href="{% url 'catalog:product_create' %}">Добавить продукт</a>
 
 
 {% endblock %}
