@@ -1,37 +1,55 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from catalog.models import Product
-from django.views.generic import DeleteView, CreateView, UpdateView, ListView, DetailView
+from django.views.generic.edit import DeleteView, CreateView, UpdateView
+from django.views.generic import  ListView, DetailView
 from .forms import ProductForm
 from .models import Product
+from django.urls import reverse_lazy
+
 
 class ProductListView(ListView):
     model = Product
-    form_class = ProductForm
     template_name = 'catalog/product_list.html'
-    success_url = 'catalog/product_list'
+    context_object_name = 'products'
+    # success_url = reverse_lazy('catalog:catalog/product_list')
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+
+
+    # path('',ProductListView.as_view(), name='products_list'),
+    # path('catalog/<int:pk>',ProductDetailView.as_view(), name='product_detail'),
+    # path('catalog/new/',ProductCreateView.as_view(), name='product_create'),
+    # path('catalog/<int:pk>/edit/',ProductUpdateView.as_view(), name='product_edit'),
+    # path('catalog/<int:pk>/delete/',ProductDeleteView.as_view(), name='product_delete'),
+
 
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
-    success_url = 'catalog/product_list'
-
-class ProductDeleteView(DeleteView):
-    model = Product
-    form_class = ProductForm
-    template_name = 'catalog/product_detail.html'
-    success_url = 'catalog/product_list'
+    success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
-    template_name = 'catalog/product_detail.html'
-    success_url = 'catalog/product_list'
+    template_name = 'catalog/product_create.html'
 
-class ProductDetailView(DetailView):
+    def get_success_url(self):
+        return reverse_lazy('catalog:product_detail', kwargs={'pk':self.object.pk})
+
+
+class ProductDeleteView(DeleteView):
     model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:product_list')
+
+# : /Users/ekaterinakurockina/PycharmProjects/pythonProject14/templates/catalog/product_confirm_delete.html (Source does not exist)
+# In template /Users/ekaterinakurockina/PycharmProjects/pythonProject14/catalog/templates/catalog/product_form.html, error at line 12
+
+
 #
 #
 # def home(request):

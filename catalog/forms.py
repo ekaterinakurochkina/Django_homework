@@ -16,7 +16,7 @@ class ProductForm(forms.ModelForm):
     # updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения', null=True)
     class Meta:
         model = Product
-        fields = ['name', 'description', 'category', 'price']
+        fields = ['name', 'description', 'category', 'price', 'image']
         exclude = ['created_at', 'updated_at']
 #
 # class StyleFormMixin:
