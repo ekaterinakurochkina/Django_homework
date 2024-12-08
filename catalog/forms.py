@@ -12,9 +12,9 @@ class StyleFormMixin:
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             if isinstance(field, BooleanField):
-                field.widjet.attrs['class']="form-check-input"
+                field.widget.attrs['class']="form-check-input"
             else:
-                field.widjet.attrs['class'] = "form-class"
+                field.widget.attrs['class'] = "form-class"
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
