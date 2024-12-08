@@ -1,3 +1,5 @@
+from xmlrpc.client import Boolean
+from django.db.models import BooleanField
 from django import forms
 from .models import Category, Product
 from django.core.exceptions import ValidationError
@@ -5,8 +7,16 @@ from django.core.exceptions import ValidationError
 forbidden = ['казино', 'криптовалюта', 'крипта', 'биржа',
              'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
+class StyleFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field, BooleanField):
+                field.widjet.attrs['class']="form-check-input"
+            else:
+                field.widjet.attrs['class'] = "form-class"
 
-class ProductForm(forms.ModelForm):
+class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'image', 'category', 'price', 'created_at']
@@ -52,7 +62,7 @@ class ProductForm(forms.ModelForm):
         return image
 
 
-class CategoryForm(forms.ModelForm):
+class CategoryForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'description']
