@@ -5,8 +5,7 @@ from . import views
 from django.contrib import admin
 from users.apps import UsersConfig
 from django.contrib.auth.views import LoginView, LogoutView
-from users.views import logout_view
-from django.core.mail import send_mail
+from users.views import logout_view, UserCreateView, email_verification
 
 # from catalog.views import ProductCreateView, ProductDeleteView, ProductUpdateView,ProductListView, ProductDetailView
 from .models import User
@@ -22,7 +21,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name="login.html"), name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', UserCreateView.as_view(), name='register'),
-    path('send_mail',send_mail, name='send_mail'),
+    path('email-confirm/<str:token>',email_verification, name='email-confirm'),
 ]
 
 if settings.DEBUG:
