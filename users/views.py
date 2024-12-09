@@ -1,10 +1,10 @@
+import secrets
 from django.views.generic.edit import  CreateView
 from django.urls import reverse_lazy, reverse
-import secrets
 from config.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm
 from users.models import User
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.shortcuts import redirect, get_object_or_404
 from django.core.mail import send_mail
 

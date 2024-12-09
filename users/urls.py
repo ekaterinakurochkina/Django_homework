@@ -2,6 +2,11 @@ from tempfile import template
 
 from django.urls import path
 from users.apps import UsersConfig
+from django.contrib.auth.views import LoginView, LogoutView
+from users.views import logout_view, UserCreateView, email_verification
+
+# from catalog.views import ProductCreateView, ProductDeleteView, ProductUpdateView,ProductListView, ProductDetailView
+from .models import User
 from django.contrib.auth.views import LoginView
 from users.views import logout_view, UserCreateView, email_verification
 from users.views import logout_view

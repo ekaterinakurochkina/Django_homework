@@ -133,14 +133,26 @@ AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = '/catalog/'
 LOGOUT_REDIRECT_URL = 'logout'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'ekaterina79fed@gmail.com'
+# EMAIL_HOST_PASSWORD = 'iboibcesqypezrip'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'ekaterina79fed@gmail.com'
-EMAIL_HOST_PASSWORD = 'iboi bces qype zrip'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'From-garden@yandex.ru'
+EMAIL_HOST_PASSWORD = 'yxsolqvapbkbxulz'
 
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
+
+
+# app_name = 'mail_agent_django'
+# password = 'iboi bces qype zrip'
+# password = 'iboi bces qype zrip'
 
