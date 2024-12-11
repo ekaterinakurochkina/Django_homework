@@ -151,6 +151,7 @@ EMAIL_HOST_PASSWORD = 'yxsolqvapbkbxulz'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 
+LOGIN_URL = "users:login"
 
 # app_name = 'mail_agent_django'
 # password = 'iboi bces qype zrip'
