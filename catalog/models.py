@@ -25,8 +25,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения', null=True)
     is_published = models.BooleanField(verbose_name="Публикация продукта", default=False)
-    # owner = models.ForeignKey(User, verbose_name="Владелец", help_text="Укажите владельца товара", blank=True, null=True, on_delete=models.SET_NULL)
-    owner = models.ForeignKey(User, verbose_name="Владелец", help_text="Укажите владельца товара", blank=True, default=User.email, null=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(User, verbose_name="Владелец", help_text="Укажите владельца товара", blank=True,  null=True, on_delete=models.SET_NULL) # default=User.email,
 
     def __str__(self):
         return self.name

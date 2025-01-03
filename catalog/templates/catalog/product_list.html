@@ -11,7 +11,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for product in object_list %}
 
-        {% if product.is_published == True and not perms.user.can_unpublish_product %} <!-- если вы не модератор, вы увидите только опубликованные товары -->
+        {% if not perms.user.can_unpublish_product and product.is_published == True %} <!-- если вы не модератор, вы увидите только опубликованные товары -->
           <div class="col">
             <div class="card shadow-sm">
               <div class="card-image">
@@ -31,7 +31,7 @@
             </div>
           </div>
 
-        {% elif perms.user.can_unpublish_product or product.owner == user.email %}  <!-- если вы модератор или владелец товаров, вы увидите их все -->
+        {% elif perms.user.can_unpublish_product %}  <!-- если вы модератор или владелец товаров, вы увидите их все  or product.owner == user.email-->
           <div class="col">
             <div class="card shadow-sm">
               <div class="card-image">

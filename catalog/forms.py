@@ -19,7 +19,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image', 'category', 'price', 'created_at', 'is_published']
+        fields = ['name', 'description', 'image', 'category', 'price', 'created_at', 'is_published','owner']
         exclude = ['created_at', 'updated_at']
 
     def __init__(self, *args, **kwargs):
@@ -32,6 +32,7 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         self.fields['image'].widget.attrs.update({'class': 'form-control'})
         self.fields['category'].widget.attrs.update({'class': 'form-control'})
         self.fields['price'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите цену'})
+        # self.fields['owner'].widget.attrs.update({'class': 'form-control'})
         # self.fields['created_at'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите дату'})
 
     def clean_name(self):
@@ -61,9 +62,9 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
                 raise ValidationError("Файл недопустимого формата")
         return image
 
-    # def owner(self):
-    #     owner = self.request.user
-    #     return owner
+    def create_owner(self):
+        owner = self.request.user
+        return owner
 
 
 class CategoryForm(StyleFormMixin, forms.ModelForm):
