@@ -1,9 +1,10 @@
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import  ListView, DetailView
-from .forms import ProductForm
+from .forms import ProductForm, ProductModeratorForm
 from .models import Product
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 class ProductListView(ListView):
     model = Product
@@ -17,12 +18,12 @@ class ProductDetailView(DetailView):
     template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
 
-
-    # path('',ProductListView.as_view(), name='products_list'),
-    # path('catalog/<int:pk>',ProductDetailView.as_view(), name='product_detail'),
-    # path('catalog/new/',ProductCreateView.as_view(), name='product_create'),
-    # path('catalog/<int:pk>/edit/',ProductUpdateView.as_view(), name='product_edit'),
-    # path('catalog/<int:pk>/delete/',ProductDeleteView.as_view(), name='product_delete'),
+    # def get_object(self, queryset=None):     # функция, которая показывает карточку товара только его владельцу
+    #     self.object = super().get_object(queryset)
+    #     if self.queryset == self.object.owner:
+    #         self.object.save()
+    #         return self.object
+    #     raise PermissionDenied
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -32,10 +33,19 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('catalog:product_list')
 
 
+
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        if user.has_perm("catalog.can_unpublish_product"):
+            return ProductModeratorForm
+        raise PermissionDenied
 
     def get_success_url(self):
         return reverse_lazy('catalog:product_detail', kwargs={'pk':self.object.pk})
@@ -46,8 +56,6 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:product_list')
 
-# : /Users/ekaterinakurockina/PycharmProjects/pythonProject14/templates/catalog/product_confirm_delete.html (Source does not exist)
-# In template /Users/ekaterinakurockina/PycharmProjects/pythonProject14/catalog/templates/catalog/product_form.html, error at line 12
 
 
 #

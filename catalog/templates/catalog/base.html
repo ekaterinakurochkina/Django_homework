@@ -174,6 +174,12 @@
         <h1 class="fw-light">Каталог товаров</h1>
         <p class="lead text-body-secondary">Широкий ассортимент товаров для вашей жизни</p>
 
+        {% if user.is_authenticated %}
+          <p> Добро пожаловать, {{user.email}}!</p>
+        {% else %}
+          <p> Добро пожаловать!</p>
+        {% endif %}
+
       </div>
     </div>
   </section>

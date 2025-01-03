@@ -19,7 +19,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image', 'category', 'price', 'created_at']
+        fields = ['name', 'description', 'image', 'category', 'price', 'created_at', 'is_published']
         exclude = ['created_at', 'updated_at']
 
     def __init__(self, *args, **kwargs):
@@ -61,8 +61,17 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
                 raise ValidationError("Файл недопустимого формата")
         return image
 
+    # def owner(self):
+    #     owner = self.request.user
+    #     return owner
+
 
 class CategoryForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'description']
+
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):   # Класс для отображения продукта для модератора
+    class Meta:
+        model = Product
+        fields = ['name', 'is_published', 'owner']

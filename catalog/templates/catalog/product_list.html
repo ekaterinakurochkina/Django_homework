@@ -1,28 +1,67 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
+
+{% if user.is_authenticated %} <!-- для зареганых пользователей будет видна кнопка добавления товара -->
 <a class="btn btn-primary w-100" role="button" href="{% url 'catalog:product_create' %}">Добавить товар</a>
+{% endif %}
+
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for product in object_list %}
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image">
-              <img src="{{ product.image | media_filter }}" alt="{{ product.name }}" class="img-fluid">
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{ product.name }}</p>
-              <p class="card-text">{{ product.description | truncatechars:100 }}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-primary" role="button" href="{% url 'catalog:product_detail' product.pk %}">Подробнее</a>
+        {% if product.is_published == True and not perms.user.can_unpublish_product %} <!-- если вы не модератор, вы увидите только опубликованные товары -->
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image">
+                <img src="{{ product.image | media_filter }}" alt="{{ product.name }}" class="img-fluid">
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{ product.name }}</p>
+                <p class="card-text">{{ product.description | truncatechars:100 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-primary" role="button" href="{% url 'catalog:product_detail' product.pk %}">Подробнее</a>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+        {% elif perms.user.can_unpublish_product or product.owner == user.email %}  <!-- если вы модератор или владелец товаров, вы увидите их все -->
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image">
+                <img src="{{ product.image | media_filter }}" alt="{{ product.name }}" class="img-fluid">
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{ product.name }}</p>
+                {% if product.is_published == True %} <!-- для опубликованных товаров будет зеленое ДА -->
+                  <span>Товар опубликован: </span>
+                    <span>
+                      <p style="color: green;">Да</p>
+                    </span>
+                {% else %}
+                  <span>Товар опубликован: </span>
+                    <span>
+                      <p style="color: red;">Нет</p> <!-- для неопубликованных товаров будет крастное НЕТ -->
+                    </span>
+                {% endif %}
+                <p class="card-text">{{ product.description | truncatechars:100 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    {% if user.is_authenticated %} <!-- для зареганых пользователей будет видна кнопка Подробнее о товаре -->
+                    <a class="btn btn-primary" role="button" href="{% url 'catalog:product_detail' product.pk %}">Подробнее</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
         {% endfor %}
       </div>
     </div>
