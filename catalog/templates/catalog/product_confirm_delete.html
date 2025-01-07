@@ -1,0 +1,18 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Удаление продукта{% endblock %}
+
+{% block content %}
+<h2>Удаление товара</h2>
+{% if object.owner == user or user.has_perm('users.can_unpublish_product') %}
+    <p>Вы уверены, что хотите удалить продукт "{{ object.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endif  %}
+    <p>У Вас нет прав для удаления этого товара</p>
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Вернуться в каталог</a>
+
+{% endblock %}
