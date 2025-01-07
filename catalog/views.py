@@ -5,11 +5,16 @@ from .models import Product
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from catalog.servies import get_product_from_cache
+
 
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
+
+    def get_queryset(self):         # подключаем к представлению функцию обращения к кешу
+        return get_product_from_cache()
 
     def get_queryset(self):
         user = self.request.user

@@ -137,22 +137,21 @@ LOGOUT_REDIRECT_URL = 'logout'
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', False)==True
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', False)==True  # = True if os.getenv('DEBUG')=="True" else False
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', False)==True
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = "users:login"
 
+CACHE_ENABLED = os.getenv('EMAIL_USE_TLS', False)==True
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': os.getenv('LOCATION'),
     }
 }
 
