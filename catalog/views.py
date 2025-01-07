@@ -10,6 +10,15 @@ class ProductListView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.has_perm("catalog.can_unpublish_product"):
+            return Product.objects.all()
+        elif not user.is_authenticated:
+            return Product.objects.filter(is_published=True)
+        else:
+            return Product.objects.filter(owner=user)
     # success_url = reverse_lazy('catalog:catalog/product_list')
 
 
@@ -61,6 +70,9 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:product_list')
+
+
+# class ProductService.get_product_category(category):
 
 
 

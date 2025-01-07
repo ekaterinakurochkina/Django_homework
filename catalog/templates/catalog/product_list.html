@@ -11,28 +11,9 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for product in object_list %}
 
-        {% if not perms.user.can_unpublish_product and product.is_published == True %} <!-- если вы не модератор, вы увидите только опубликованные товары -->
-          <div class="col">
-            <div class="card shadow-sm">
-              <div class="card-image">
-                <img src="{{ product.image | media_filter }}" alt="{{ product.name }}" class="img-fluid">
-              </div>
-              <div class="card-body">
-                <p class="card-text">{{ product.name }}</p>
-                 <!--<p class="card-text">{{ product.description | truncatechars:100 }}</p> -->
-                <p class="card-text">Цена: {{ product.price }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    {% if user.is_authenticated %}
-                    <a class="btn btn-primary" role="button" href="{% url 'catalog:product_detail' product.pk %}">Подробнее</a>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-        {% elif perms.user.can_unpublish_product %}  <!-- если вы модератор или владелец товаров, вы увидите их все  or product.owner == user.email-->
+
+
           <div class="col">
             <div class="card shadow-sm">
               <div class="card-image">
@@ -63,7 +44,7 @@
               </div>
             </div>
           </div>
-        {% endif %}
+
         {% endfor %}
       </div>
     </div>
