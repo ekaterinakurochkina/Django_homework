@@ -1,15 +1,31 @@
+from unicodedata import category
+
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import  ListView, DetailView
 from .forms import ProductForm, ProductModeratorForm
-from .models import Product
+from .models import Product, Category
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from catalog.servies import get_product_from_cache, get_product_category
+
 
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
+
+    def get_queryset(self):         # подключаем к представлению функцию обращения к кешу
+        return get_product_from_cache()
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.has_perm("catalog.can_unpublish_product"):
+            return Product.objects.all()
+        elif not user.is_authenticated:
+            return Product.objects.filter(is_published=True)
+        else:
+            return Product.objects.filter(owner=user)
     # success_url = reverse_lazy('catalog:catalog/product_list')
 
 
@@ -61,6 +77,16 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:product_list')
+
+
+class ProductServiceView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = 'catalog/product_list_from_category.html'
+    context_object_name = 'products_category'
+    def get_queryset(self):
+        category_id = self.kwargs.get('pk')
+        return get_product_category(category_id=category_id)
+
 
 
 

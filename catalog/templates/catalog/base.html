@@ -180,6 +180,10 @@
           <p> Добро пожаловать!</p>
         {% endif %}
 
+     {% if user.is_authenticated %} <!-- для зареганых пользователей будет видна кнопка добавления товара -->
+<a class="btn btn-primary w-100" role="button" href="{% url 'catalog:product_create' %}">Добавить товар в каталог</a>
+{% endif %}
+
       </div>
     </div>
   </section>
