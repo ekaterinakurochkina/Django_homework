@@ -2,20 +2,12 @@
 {% load my_tags %}
 {% block content %}
 
-<p></p>
-<p></p>
-
-<a class="btn btn-primary w-30" role="button" href="{% url 'catalog:product_list' %}">Все товары</a>
-<a class="btn btn-secondary w-30" role="button" href="{% url 'catalog:product_list_from_category' pk=8 %}">Бытовая техника</a>
-<a class="btn btn-secondary w-30" role="button" href="{% url 'catalog:product_list_from_category' pk=9 %}">Косметика и парфюмерия</a>
-<a class="btn btn-secondary w-30" role="button" href="{% url 'catalog:product_list_from_category' pk=10 %}">Спортивные товары</a>
 
 
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for product in object_list %}
-
+        {% for product in products_category %}
           <div class="col">
             <div class="card shadow-sm">
               <div class="card-image">
@@ -51,7 +43,7 @@
       </div>
     </div>
   </div>
-
+<a class="btn btn-primary" role="button" href="{% url 'catalog:product_list' %}">Вернуться в каталог</a>
 
 
 {% endblock %}

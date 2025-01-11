@@ -1,11 +1,13 @@
+from unicodedata import category
+
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import  ListView, DetailView
 from .forms import ProductForm, ProductModeratorForm
-from .models import Product
+from .models import Product, Category
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from catalog.servies import get_product_from_cache
+from catalog.servies import get_product_from_cache, get_product_category
 
 
 class ProductListView(ListView):
@@ -77,7 +79,14 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('catalog:product_list')
 
 
-# class ProductService.get_product_category(category):
+class ProductServiceView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = 'catalog/product_list_from_category.html'
+    context_object_name = 'products_category'
+    def get_queryset(self):
+        category_id = self.kwargs.get('pk')
+        return get_product_category(category_id=category_id)
+
 
 
 
